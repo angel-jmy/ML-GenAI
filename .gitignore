@@ -1,3 +1,4 @@
 Clustering and Regression/data/*.json
 Clustering and Regression/data.csv
+Clustering and Regression/temp-plot.html
 .env
