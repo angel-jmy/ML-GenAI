@@ -1,45 +1,23 @@
-# ML-GenAI
+# ML-GenAI Training Projects
 
-This repository contains a series of exploratory notebooks focused on integrating **Machine Learning (ML)** techniques with **Generative AI (GenAI)** workflows. It covers foundational and advanced topics in regression, clustering, and memory management within LLM-based systems.
+This repository contains hands-on projects completed as part of my AI/ML upskilling, focusing on practical applications of generative AI and foundational machine learning techniques. The goal is to develop end-to-end workflows that demonstrate the use of current tools and frameworks for data-driven analysis, prompt engineering, and LLM-based applications.
 
-## 📁 Project Structure
+## Key Components
 
-- **Clustering and Regression**  
-  Exploratory notebooks on unsupervised learning (e.g., K-Means) and supervised regression models. Includes implementation and evaluation.
+### LangGraph Workflows
+- Built structured conversational flows using `LangGraph`, leveraging OpenAI’s function calling and routing with `TypedDict` and `llm.with_structured_output()`.
+- Developed branching logic for use cases like AI-powered floral recommendation systems.
 
-- **Regression and Assistant**  
-  Combines regression models with assistant-style LLM interactions to support analytical reasoning and prediction tasks.
+### Data Analysis & Modeling
+- Implemented clustering and regression workflows using scikit-learn to analyze synthetic datasets.
+- Visualized model performance and feature insights using `matplotlib` and `seaborn`.
 
-- **Memory Mechanism**  
-  A deep dive into memory modules for conversational AI using LangChain:
-  - `ConversationBufferMemory`
-  - `ConversationBufferWindowMemory`
-  - `ConversationSummaryMemory`
-  - `ConversationSummaryBufferMemory`
-  - `ConversationTokenBufferMemory`
-  - LangGraph implementation and visualization
-  - Token usage vs. memory tradeoffs
+### LLM Experimentation
+- Explored prompt templating, output parsing, and LLM response customization.
+- Applied `LangChain` and `OpenAI API` for agent-based workflows.
 
-## 📌 Highlights
+## Tools Used
+- Python, LangGraph, LangChain, OpenAI API
+- scikit-learn, pandas, numpy, matplotlib, seaborn
+- Jupyter Notebooks
 
-- 🔍 Hands-on tests of memory strategies using LangChain and LangGraph.
-- 📊 Token usage visualization across memory types.
-- 🧠 Use of summarization and window trimming for efficient context retention.
-- 🛠️ Custom workflows using `StateGraph` and memory checkpointing.
-
-## 🔧 Requirements
-
-- Python 3.9+
-- `langchain`, `openai`, `matplotlib`, `nbformat`, `uuid`, and other standard libraries.
-- Jupyter Notebook or VS Code with Jupyter extension
-
-## 📚 References
-
-- [LangChain Documentation](https://docs.langchain.com/)
-- [LangGraph Memory Guide](https://langchain-ai.github.io/langgraph/agents/memory/)
-
-## 🚀 Getting Started
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/ML-GenAI.git
