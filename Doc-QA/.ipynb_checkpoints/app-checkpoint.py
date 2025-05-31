@@ -4,10 +4,9 @@ from dotenv import load_dotenv
 
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQA
 
-os.chdir("C:/Users/Chuyue Shen/OneDrive/Desktop/GCCC_data_science/quiz2/quiz2")
 
 app = Flask(__name__)
 

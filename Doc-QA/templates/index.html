@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doc-QA App</title>
+</head>
+<body>
+    <h2>Ask a Question About Your Documents</h2>
+    <form method="POST">
+        <input type="text" name="question" placeholder="Type your question here" size="60">
+        <input type="submit" value="Ask">
+    </form>
+
+    {% if result %}
+        <h3>Answer:</h3>
+        <p>{{ result['result'] }}</p>
+    {% endif %}
+</body>
+</html>
+
