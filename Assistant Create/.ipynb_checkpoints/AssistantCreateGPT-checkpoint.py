@@ -40,6 +40,36 @@ sales_data.head()
 #     import pandas as pd
 #     import matplotlib.pyplot as plt
 #     from io import StringIO
+#
+#     data = pd.read_csv(StringIO(file_content))
+#
+#     plt.figure(figsize=(10, 6))
+#     plt.plot(data['column1'], data['column2'])
+#     plt.title('Column1 vs Column2')
+#     plt.xlabel('Column1')
+#     plt.ylabel('Column2')
+#     plt.savefig('visualization.png')
+#
+#     return "Data processed and visualization created."
+
+# template = """
+# Given the data and a query, you can write appropriate code and create appropriate visualizations.
+# Data: {data}
+# """
+#
+# llm = OpenAI(model="gpt-4-0125-preview")
+# prompt = PromptTemplate(template=template, input_variables=["data"])
+# llm_chain = LLMChain(llm=llm, prompt=prompt)
+# agent_executor = create_openai_functions_agent(llm_chain, tools=[process_data])
+#
+# file_path = 'path_to_your_file.csv'
+# file_path = 'Spotify_Songs.csv'
+# file_tool = FileTool(file_path)
+# file_content = file_tool.run()
+# response = agent_executor({"data": file_content})
+#
+# print(response)
+
 
 
 
