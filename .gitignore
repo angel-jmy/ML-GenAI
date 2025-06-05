@@ -4,3 +4,6 @@ Clustering and Regression/temp-plot.html
 .env
 Assistant Create/*.csv
 Assistant Create/history images
+credentials.json
+Tools and Toolkits/token.json
+testing.py
