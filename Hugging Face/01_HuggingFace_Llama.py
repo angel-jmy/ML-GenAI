@@ -1,6 +1,8 @@
 from transformers import AutoTokenizer,AutoModelForCausalLM
 import os
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = 'HuggingFace API Token'
+# os.environ['HUGGINGFACEHUB_API_TOKEN'] = 'HuggingFace API Token'
+os.environ['HF_API_KEY'] = 'HuggingFace API Token'
+
 
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B")
 # # tokenizer = AutoTokenizer.from_pretrained("unsloth/llama-3-8b-bnb-4bit")

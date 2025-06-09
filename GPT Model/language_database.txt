@@ -1,0 +1,4 @@
+The cat sat on the mat.
+GPT models are amazing.
+Transformers changed NLP forever.
+Attention is all you need.
