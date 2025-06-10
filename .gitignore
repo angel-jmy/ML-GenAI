@@ -7,3 +7,6 @@ Assistant Create/history images
 credentials.json
 Tools and Toolkits/token.json
 testing.py
+Databases/*.db
+Databases/*.sql
+
