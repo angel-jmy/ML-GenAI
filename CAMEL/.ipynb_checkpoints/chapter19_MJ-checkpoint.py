@@ -7,13 +7,16 @@ CAMEL: Communication Agents Mind Exploration LLM
 
 Communication Agents:
 
-Inception Prompting: Task specifier prompt\ AI assistant prompts and AI user prompts
+Inception Prompting: Task specifier prompt / AI assistant prompts and AI user prompts
 
 Task: Brainstorming a flower marketing scheme through role-playing.
 1. Role-playing Agent
 2. Task Specification
 3. Initial prompt setup
 4. Interaction norms
+
+arxiv.org/pdf/2303.17760
+
 """
 
 from dotenv import load_dotenv

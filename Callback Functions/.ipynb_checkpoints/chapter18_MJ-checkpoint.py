@@ -93,96 +93,96 @@ AsyncCallbackHandler
 
 '''
 
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
-import asyncio #event loop
-from typing import Dict, List, Any
+# import asyncio #event loop
+# from typing import Dict, List, Any
 
-from langchain_openai import OpenAI, ChatOpenAI
-from langchain.schema import LLMResult, HumanMessage
-from langchain.callbacks.base import BaseCallbackHandler, AsyncCallbackHandler
+# from langchain_openai import OpenAI, ChatOpenAI
+# from langchain.schema import LLMResult, HumanMessage
+# from langchain.callbacks.base import BaseCallbackHandler, AsyncCallbackHandler
 
-# Create a synchronous callback handler
-class FlowerSyncHandler(BaseCallbackHandler):
-    def on_llm_new_token(self, token: str, **kwargs) -> None:
-        print(f"flower data:token:{token}")
+# # Create a synchronous callback handler
+# class FlowerSyncHandler(BaseCallbackHandler):
+#     def on_llm_new_token(self, token: str, **kwargs) -> None:
+#         print(f"flower data:token:{token}")
 
-# Create a Async handler
-class FlowerAsyncHandler(AsyncCallbackHandler):
-    async def on_llm_start(
-        self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
-    ) -> None:
-        print("flower data!!!!!!!!!")
-        await asyncio.sleep(0.5)
-        print("flower data fetched. Providing suggestions!!!!!!!!!!!!!")
+# # Create a Async handler
+# class FlowerAsyncHandler(AsyncCallbackHandler):
+#     async def on_llm_start(
+#         self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
+#     ) -> None:
+#         print("flower data!!!!!!!!!")
+#         await asyncio.sleep(0.5)
+#         print("flower data fetched. Providing suggestions!!!!!!!!!!!!!")
 
-    async def on_llm_end(self, response: LLMResult, **kwargs: Any) -> None:
-        print("Organizing flower suggestions..")
-        await asyncio.sleep(0.5)
-        print("Wishing you a pleasant day!")
+#     async def on_llm_end(self, response: LLMResult, **kwargs: Any) -> None:
+#         print("Organizing flower suggestions..")
+#         await asyncio.sleep(0.5)
+#         print("Wishing you a pleasant day!")
 
-async def main():
-    flower_chat = ChatOpenAI(
-        max_tokens=100,
-        streaming=True,
-        callbacks=[FlowerSyncHandler(), FlowerAsyncHandler()]
-    )
+# async def main():
+#     flower_chat = ChatOpenAI(
+#         max_tokens=100,
+#         streaming=True,
+#         callbacks=[FlowerSyncHandler(), FlowerAsyncHandler()]
+#     )
 
-    await flower_chat.agenerate([
-        [HumanMessage(content="Which flowers are best for birthday? Just mentions 3 types briefly, not exceeding 50 characters.")]
-    ])
+#     await flower_chat.agenerate([
+#         [HumanMessage(content="Which flowers are best for birthday? Just mentions 3 types briefly, not exceeding 50 characters.")]
+#     ])
 
-asyncio.run(main())
+# asyncio.run(main())
 
 '''
 Constructing Token Counters with get_openai_callback
 '''
 
 
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
-# import asyncio
-# from langchain_openai import OpenAI
-# from langchain.chains import ConversationChain
-# # Using ConversationBufferMemory
-# from langchain.chains.conversation.memory import ConversationBufferMemory
-# from langchain_community.callbacks import get_openai_callback
+import asyncio
+from langchain_openai import OpenAI
+from langchain.chains import ConversationChain
+# Using ConversationBufferMemory
+from langchain.chains.conversation.memory import ConversationBufferMemory
+from langchain_community.callbacks import get_openai_callback
 
-# llm = OpenAI(temperature=0.5, model_name="gpt-3.5-turbo-instruct")
+llm = OpenAI(temperature=0.5, model_name="gpt-3.5-turbo-instruct")
 
-# conversation = ConversationChain(
-#     llm=llm,
-#     memory=ConversationBufferMemory()
-# )
+conversation = ConversationChain(
+    llm=llm,
+    memory=ConversationBufferMemory()
+)
 
-# with get_openai_callback() as cb:
-#     # round 1
-#     conversation("My sister's birthday is tomorrow, and I need a birthday bouquet.")
-#     # print("Memory after the first conversation:", conversation.memory.buffer)
+with get_openai_callback() as cb:
+    # round 1
+    conversation("My sister's birthday is tomorrow, and I need a birthday bouquet.")
+    print("Memory after the first conversation:", conversation.memory.buffer)
 
-#     # round 2
-#     conversation("She likes pink roses, specifically the color pink.")
-#     # print("Memory after the second conversation:", conversation.memory.buffer)
+    # round 2
+    conversation("She likes pink roses, specifically the color pink.")
+    print("Memory after the second conversation:", conversation.memory.buffer)
 
-#     # round 3
-#     conversation("I'm back again. Do you remember why I came to buy flowers yesterday?")
-#     # print("Memory after the third conversation:", conversation.memory.buffer)
+    # round 3
+    conversation("I'm back again. Do you remember why I came to buy flowers yesterday?")
+    print("Memory after the third conversation:", conversation.memory.buffer)
 
-#     # print("Total tokens used:", cb.total_tokens)
-#     # Total tokens used was 494
+    print("Total tokens used:", cb.total_tokens)
+    # Total tokens used was 494
 
-# async def interactions():
-#     with get_openai_callback() as cb:
-#         await asyncio.gather(
-#             *[llm.agenerate(["What color flowers does my sister like?"]) for _ in range(3)]
-#         )
-#         print("Total tokens used in interactions:", cb.total_tokens)
+async def interactions():
+    with get_openai_callback() as cb:
+        await asyncio.gather(
+            *[llm.agenerate(["What color flowers does my sister like?"]) for _ in range(3)]
+        )
+        print("Total tokens used in interactions:", cb.total_tokens)
 
-# asyncio.run(interactions())
+asyncio.run(interactions())
 
-# # Total tokens used in interactions 107
+# Total tokens used in interactions 107
 
 
 """
