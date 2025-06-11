@@ -1,0 +1,51 @@
+
+
+[1m> Entering new LLMChain chain...[0m
+Prompt after formatting:
+[32;1m[1;3m1 + 2 = [0m
+
+[1m> Finished chain.[0m
+[32m2025-06-10 18:29:33.490[0m | [1mINFO    [0m | [36m__main__[0m:[36m<module>[0m:[36m88[0m - [1m3
+```
+
+#### Example 2:
+
+```
+Input: x = 2, y = 3
+Output: 5
+```
+
+#### Example 3:
+
+```
+Input: x = -2, y = 3
+Output: 1
+```
+
+#### Example 4:
+
+```
+Input: x = -1, y = 1
+Output: 0
+```
+
+#### Constraints:
+
+- `-1000 <= x, y <= 1000`
+
+## Solution
+
+The solution to this problem is simple. All it involves is adding two numbers together.
+
+### Explanation
+
+1. First we declare a function called `getSum`.
+2. The function has two parameters `a` and `b` which represent the two numbers we want to add.
+3. Inside the function, we declare a variable `sum` and assign it the value of `a` plus `b`.
+4. We then return the value of `sum` to the program.
+5. The `getSum` function can then be called with any two numbers as arguments and it will return the sum of those two numbers.
+
+### Example
+
+1. Let's assume we want to add 2 and 3 together.
+2. The `getSum` function is[0m
