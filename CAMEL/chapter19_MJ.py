@@ -61,7 +61,7 @@ class CAMELAgent:
     def step(self, input_message: HumanMessage) -> AIMessage:
         messages = self.update_messages(input_message)
 
-        output_message = self.model(messages)
+        output_message = self.model.invoke(messages)
         self.update_messages(output_message)
 
         return output_message
@@ -179,7 +179,7 @@ user_agent.reset()
 
 assistant_msg = HumanMessage(
     content=(
-        f"{user_sys_msg.content}。"
+        f"{user_sys_msg.content}."
         "Now start introducing them to me one by one."
         "Only reply with instructions and inputs."
     )
@@ -214,7 +214,7 @@ while n < chat_turn_limit:
         break
 
 
-#hw: Are there any business scenarios that need to be refined and specified in your requirements?Please apply the CAMEL code implement them.
+#hw: Are there any business scenarios that need to be refined and specified in your requirements? Please apply the CAMEL code implement them.
 
 """
 AI User (Flower Shop Owner):
