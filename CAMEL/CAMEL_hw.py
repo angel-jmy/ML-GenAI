@@ -186,7 +186,7 @@ assistant_msg = HumanMessage(
 )
 
 user_msg = HumanMessage(content=f"{assistant_sys_msg.content}")
-user_msg = assistant_agent.step(user_msg)
+# user_msg = assistant_agent.step(user_msg)
 
 print(f"Original task prompt:\n{task}\n")
 print(f"Specified task prompt:\n{specified_task}\n")
@@ -214,6 +214,59 @@ while n < chat_turn_limit:
         break
 
 
+
+
+
+# '''
+# Summarizing the action items
+# '''
+
+summary_pairs = []
+messages = assistant_agent.stored_messages
+
+# Start from index 1 to skip the system message
+for i in range(1, len(messages), 2):
+    if isinstance(messages[i], HumanMessage) and i + 1 < len(messages):
+        instruction = messages[i].content
+        solution = messages[i + 1].content
+        summary_pairs.append(f"Instruction: {instruction}\nSolution: {solution}")
+
+
+summary_prompt = (
+    "You are a helpful assistant. Summarize the following instruction-solution pairs "
+    "into a list of clear action items for a project implementation checklist.\n\n"
+    "Respond with a bullet point list of specific, unambiguous actions.\n\n"
+    "Each bullet should not exceed 20 words in length.\n\n"
+    "Conversation History:\n\n"
+    + "\n\n---\n\n".join(summary_pairs)
+)
+
+
+
+summary_llm = ChatOpenAI(model_name="gpt-4", temperature=0.3)
+
+response = summary_llm.invoke([
+    HumanMessage(content=summary_prompt)
+])
+
+print("✅ Final Action Items:\n")
+print(response.content)
+
+
+
 #hw: Are there any business scenarios that need to be refined and specified in your requirements? Please apply the CAMEL code implement them.
 
 
+'''
+✅ Final Action Items:
+
+- Analyze current traffic congestion levels, peak hours, major bottlenecks, and existing congestion management strategies in San Francisco's CBD.
+- Examine demographic data to identify population distribution and trends in San Francisco's CBD and surrounding areas.
+- Analyze commuting patterns, including modes of transportation used, origin-destination pairs, peak commuting hours, and commuting trends in San Francisco's CBD.
+- Analyze vehicle emissions data, pollutant levels, sources of emissions, and their impact on air quality in San Francisco's CBD.
+- Assess potential changes in travel behavior, economic implications for businesses, and effects on low-income residents due to congestion pricing in San Francisco's CBD.
+- Devise mitigation strategies to address potential equity implications for low-income residents resulting from congestion pricing.
+- Evaluate the cost-effectiveness and feasibility of implementing congestion pricing in San Francisco's CBD.
+- Summarize the findings and recommendations based on the evaluation of the socioeconomic impact, cost-effectiveness, and feasibility of implementing congestion pricing.
+- Plan for further analysis of detailed implementation plans, continued stakeholder engagement, and pilot testing for successful deployment of congestion pricing.
+'''
