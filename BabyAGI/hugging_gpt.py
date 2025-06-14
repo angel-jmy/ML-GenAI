@@ -20,31 +20,60 @@ def weather_analysis(city: str) -> str:
     """Fetches real-time weather info using Tavily for a given city."""
     api_key = os.getenv("TAVILY_API_KEY")
     if not api_key:
-        return "[Error] TAVILY_API_KEY not set."
+        return "[Error] TAVILY_API_KEY not found in environment."
 
-    client = TavilyClient(api_key=api_key)
-    results = client.search(query=f"Current weather in {city}", include_raw_content=True)
-    if not results["results"]:
-        return f"[Error] No results for {city}"
-    
-    best = results["results"][0]
-    return f"{best['title']}\n{best['content']}\nSource: {best['url']}"
+    try:
+        client = TavilyClient(api_key=api_key)
+        query = f"Current weather in {location}"
+        result = client.search(query=query, include_raw_content=True)
+
+        if not result or not result["results"]:
+            return f"[Error] No results found for '{location}'."
+
+        # Use first relevant result
+        best = result["results"][0]
+        title = best.get("title", "")
+        snippet = best.get("content", "")
+        url = best.get("url", "")
+
+        return f"{title}\n{snippet}\nSource: {url}"
+
+    except Exception as e:
+        return f"[Error] Tavily search failed: {str(e)}"
 
 # === Tool 2: Flower Storage Strategy via GPT ===
 flower_prompt = ChatPromptTemplate.from_template("""
-You are an AI botanical storage expert.
-Given the weather details below, output a flower storage strategy:
+You are a botanical storage expert. Based on the current weather conditions below,
+write a flower storage strategy that ensures optimal freshness and prevents damage.
 
-{weather}
+Weather:
+- Temperature: {temp_c}°C
+- Humidity: {humidity}%
+- Wind Speed: {wind_mph} mph
+- Condition: {condition}
 
-Flower Storage Strategy:
+Strategy:
 """)
+
 flower_chain = flower_prompt | llm | StrOutputParser()
 
 @tool
 def flower_strategy(weather: str) -> str:
     """Generates flower storage strategy based on weather text."""
-    return flower_chain.invoke({"weather": weather})
+    import ast
+    try:
+        weather = ast.literal_eval(weather_info)
+        strategy = flower_chain.invoke({
+            "temp_c": weather.get("temp_c", "unknown"),
+            "humidity": weather.get("humidity", "unknown"),
+            "wind_mph": weather.get("wind_mph", "unknown"),
+            "condition": weather.get("condition", "unknown")
+        })
+        print(strategy)
+        return strategy
+
+    except Exception as e:
+        return f"[Error] Could not parse weather input: {e}"
 
 # === Optional Memory (Not Used in HuggingGPT) ===
 embedding = OpenAIEmbeddings()
